@@ -53,15 +53,9 @@ public class ContentController {
     }
 
     @CrossOrigin(origins = {"http://localhost:4200", "https://lit-beach-29911.herokuapp.com"})
-    @PostMapping("/{type}")
-    public ResponseEntity<Content> setContent(@RequestBody ContentDto content) throws IOException {
-
-        Set<Section> sections = content.getSectionTypes().stream()
-                .map(t -> sectionRepository.findByType(t)
-                        .orElseGet(() -> sectionRepository.save(Section.of(t))))
-                .collect(Collectors.toSet());
-
-        return new ResponseEntity(repository.save(content.toContent(sections)), HttpStatus.OK);
+    @PostMapping
+    public ResponseEntity<Content> setContent(@RequestBody Content content) {
+        return new ResponseEntity(repository.save(content), HttpStatus.OK);
     }
 
 

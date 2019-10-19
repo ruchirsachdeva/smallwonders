@@ -10,7 +10,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @ToString

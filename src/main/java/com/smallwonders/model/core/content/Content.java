@@ -1,6 +1,7 @@
 package com.smallwonders.model.core.content;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.smallwonders.model.auth.User;
 import com.smallwonders.model.core.section.Section;
 import lombok.*;
@@ -30,7 +31,7 @@ public class Content {
     private byte[] data;
 
     @ManyToMany(mappedBy = "contents", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Section> sections;
 
     private Date created;

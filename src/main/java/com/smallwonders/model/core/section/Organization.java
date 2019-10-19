@@ -1,7 +1,7 @@
 package com.smallwonders.model.core.section;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.smallwonders.model.auth.User;
 import com.smallwonders.model.core.Coordinates;
 import com.smallwonders.model.core.content.Content;
@@ -10,11 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import java.util.Collection;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -23,21 +19,27 @@ import java.util.Set;
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true, value = {"users", "organizations"})
 @NoArgsConstructor
-public class Organization extends Section {
+public class Organization {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long organizationId;
 
     private Coordinates location;
 
+    @OneToOne
+    private Content content;
+
 
     @ManyToMany(mappedBy = "organizations", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<User> users;
 
-    public Organization(String title, String description, Collection<Content> contents, Coordinates location, Category... categories) {
-        super(title, description, SectionType.ORGANIZATION, contents, categories);
+    public Organization(Content content, Coordinates location) {
         this.location = location;
+        this.content = content;
     }
 
-    public String toString() {
-        return "Organization(location=" + this.getLocation() + ")";
-    }
+
 }

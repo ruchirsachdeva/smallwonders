@@ -7,12 +7,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
+@DiscriminatorValue(SectionType.Values.FAQ)
 public class Faq extends Section {
 
     public Faq(String title, String description, Collection<Content> contents, Category... categories) {

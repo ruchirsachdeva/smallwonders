@@ -12,12 +12,13 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
+@DiscriminatorValue(SectionType.Values.ADMISSION)
 public class Admission extends FormSection {
 
     private User child;

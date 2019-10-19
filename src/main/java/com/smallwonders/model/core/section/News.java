@@ -6,12 +6,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Collection;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
+@DiscriminatorValue(SectionType.Values.NEWS)
 public class News extends Section {
 
     public News(String title, String description, Collection<Content> contents, Category... categories) {

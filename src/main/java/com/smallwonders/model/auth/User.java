@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.smallwonders.model.core.GradeType;
-import com.smallwonders.model.core.content.Content;
 import com.smallwonders.model.core.section.Feedback;
 import com.smallwonders.model.core.section.Organization;
 import lombok.EqualsAndHashCode;
@@ -78,7 +77,6 @@ public class User implements UserDetails {
     @Column(name = "grades")
     @Enumerated(EnumType.STRING)
     private Set<GradeType> grades = new HashSet<>(Arrays.asList(GradeType.ALL));
-
 
     private boolean isVerified;
 

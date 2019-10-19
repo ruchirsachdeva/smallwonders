@@ -3,12 +3,10 @@ package com.smallwonders.dto;
 import com.smallwonders.model.core.content.Content;
 import com.smallwonders.model.core.content.ContentType;
 import com.smallwonders.model.core.section.Section;
-import com.smallwonders.model.core.section.SectionType;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +16,7 @@ public class ContentDto {
     private String title, description;
     private ContentType type;
     private MultipartFile data;
-    private List<SectionType> sectionTypes;
+    private List<Long> sectionId;
     private List<Section> sections;
 
     private Date created;

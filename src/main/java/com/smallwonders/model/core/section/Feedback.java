@@ -4,11 +4,7 @@ import com.smallwonders.model.auth.User;
 import com.smallwonders.model.core.content.Content;
 import lombok.*;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import java.util.Collection;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -16,19 +12,22 @@ import java.util.Collection;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Feedback extends Section {
+public class Feedback {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long feedbackId;
+
+    @OneToOne
+    private Content content;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Feedback(String title, String description, Collection<Content> contents, User user, Category... categories) {
-        super(title, description, SectionType.FEEDBACK, contents, categories);
-        this.user = user;
-    }
 
-    public Feedback(String title, String description, Collection<Content> contents, Rendering rendering, User user, Category... categories) {
-        super(title, description, SectionType.FEEDBACK, contents, rendering, categories);
+    public Feedback(Content content, User user) {
         this.user = user;
+        this.content = content;
     }
 }

@@ -8,12 +8,13 @@ import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Collection;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
+@DiscriminatorValue(SectionType.Values.EVENT)
 public class Event extends Section {
 
     public Event(String title, String description, Collection<Content> contents, Category... categories) {

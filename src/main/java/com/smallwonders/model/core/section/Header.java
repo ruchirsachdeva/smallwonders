@@ -8,12 +8,13 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
+@DiscriminatorValue(SectionType.Values.HEADER)
 public class Header extends Section {
 
     @Enumerated(EnumType.STRING)
