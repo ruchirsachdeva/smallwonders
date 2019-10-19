@@ -29,7 +29,7 @@ public class Content {
     @Basic
     private byte[] data;
 
-    @ManyToMany(mappedBy = "contents", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "contents", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     private Set<Section> sections;
 
@@ -48,6 +48,17 @@ public class Content {
         this.created = created;
         this.updated = updated;
         this.deleted = deleted;
+        this.visibleToPublic = visibleToPublic;
+    }
+
+    public Content(String title, String description, ContentType type, byte[] data, Set<Section> sections, boolean visibleToPublic) {
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.data = data;
+        this.sections = sections;
+        this.created = new Date();
+        this.updated = new Date();
         this.visibleToPublic = visibleToPublic;
     }
 }

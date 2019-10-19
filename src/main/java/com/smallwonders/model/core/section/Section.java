@@ -13,10 +13,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
@@ -99,6 +96,10 @@ public class Section {
     public Section(String title, String description, SectionType sectionType, Collection<Content> contents, Rendering rendering, Category... categories) {
         this(title, description, sectionType, contents, categories);
         this.rendering = rendering;
+    }
+
+    public static Section of(SectionType t) {
+        return new Section("title", "description", t, Collections.emptyList(), Rendering.CAROUSAL, Category.SCHOOL);
     }
 
     public enum Category {
