@@ -1,7 +1,6 @@
 package com.smallwonders.repository;
 
 import com.smallwonders.model.core.content.Content;
-import com.smallwonders.model.core.section.Section;
 import com.smallwonders.model.core.section.SectionType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;

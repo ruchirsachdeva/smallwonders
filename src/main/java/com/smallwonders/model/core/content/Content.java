@@ -2,12 +2,12 @@ package com.smallwonders.model.core.content;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.smallwonders.model.auth.User;
 import com.smallwonders.model.core.section.Section;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,7 +31,7 @@ public class Content {
     private byte[] data;
 
     @ManyToMany(mappedBy = "contents", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private Set<Section> sections;
 
     private Date created;
@@ -62,4 +62,23 @@ public class Content {
         this.updated = new Date();
         this.visibleToPublic = visibleToPublic;
     }
+
+    public void addSection(Section section) {
+        sections.add(section);
+        section.getContents().add(this);
+    }
+
+    public void removeSection(Section section) {
+        sections.remove(section);
+        section.getContents().remove(this);
+    }
+
+    public void addSections(List<Section> sections) {
+        sections.forEach(this::addSection);
+    }
+
+    public void removeSections(List<Section> sections) {
+        sections.forEach(this::removeSection);
+    }
+
 }

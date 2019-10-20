@@ -1,16 +1,11 @@
 package com.smallwonders.model.core.section;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.smallwonders.model.core.content.Content;
-import com.smallwonders.model.core.section.form.Admission;
-import com.smallwonders.model.core.section.form.Franchisee;
 import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DiscriminatorFormula;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.*;
@@ -74,7 +69,7 @@ public class Section {
     @Enumerated(EnumType.STRING)
     private Rendering rendering;
 
-    @Column(name = "TYPE", nullable = false, unique = true, columnDefinition = "varchar2 default " + SectionType.Values.EVENT)
+    @Column(name = "TYPE", nullable = false, unique = true, columnDefinition = "varchar2 default 'EVENT'")
     @Enumerated(EnumType.STRING)
     @ApiParam
     private SectionType type;
@@ -107,8 +102,46 @@ public class Section {
         return new Section("title", "description", t, Collections.emptyList(), Rendering.CAROUSAL, Category.SCHOOL);
     }
 
+
     public enum Category {
-        SCHOOL, COACHING, OFFICE, STUDY, SPORTS, CULTURAL, ALL;
+        SCHOOL, COACHING, OFFICE, STUDY, SPORTS, CULTURAL, ALL
+    }
+
+
+    public void addContent(Content content) {
+        contents.add(content);
+        content.getSections().add(this);
+    }
+
+    public void addContents(List<Content> contents) {
+        contents.forEach(this::addContent);
+    }
+
+    public void removeContent(Content content) {
+        contents.remove(content);
+        content.getSections().remove(this);
+    }
+
+
+    public void removeContents(List<Content> contents) {
+        contents.forEach(this::removeContent);
+    }
+
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
+
+
+    public void addCategories(List<Category> categories) {
+        categories.forEach(this::addCategory);
+    }
+
+    public void removeCategory(Category category) {
+        categories.remove(category);
+    }
+
+    public void removeCategories(List<Category> categories) {
+        categories.forEach(this::removeCategory);
     }
 
 
