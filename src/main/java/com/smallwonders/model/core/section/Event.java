@@ -22,9 +22,9 @@ public class Event extends Section {
     }
 
     public static Section dummySection() {
-        Content item1 = new Content("Event content title 1", "Event content description...1....more--", ContentType.TEXT, null, null, null, null, null, true);
-        Content item2 = new Content("Event content title 2", "Event content description...2.......more--", ContentType.TEXT, null, null, null, null, null, true);
-        Content item3 = new Content("Event content title 3", "Event content description...3........more--", ContentType.TEXT, null, null, null, null, null, true);
+        Content item1 = new Content("Event content title 1", "Event content description...1....more--", ContentType.TEXT, null, null, true);
+        Content item2 = new Content("Event content title 2", "Event content description...2.......more--", ContentType.TEXT, null, null,  true);
+        Content item3 = new Content("Event content title 3", "Event content description...3........more--", ContentType.TEXT, null, null, true);
         return new Event("Event dummy title", "Dummy event description....", Arrays.asList(item1, item2, item3), Category.ALL, Category.SCHOOL);
 
     }

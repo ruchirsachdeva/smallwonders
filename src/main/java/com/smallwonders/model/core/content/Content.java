@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.smallwonders.model.core.section.Section;
 import lombok.*;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,40 +29,40 @@ public class Content {
 
     @Lob
     @Basic
+    @JsonIgnore
     private byte[] data;
 
     @ManyToMany(mappedBy = "contents", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     private Set<Section> sections;
 
-    private Date created;
-    private Date updated;
-    private Date deleted;
+    @JsonIgnore
+    private Date created, updated, deleted;
 
     private boolean visibleToPublic;
 
-    public Content(String title, String description, ContentType type, byte[] data, Set<Section> sections, Date created, Date updated, Date deleted, boolean visibleToPublic) {
+    public Content(String title, String description, ContentType type, String base64, Set<Section> sections, boolean visibleToPublic) {
         this.title = title;
         this.description = description;
         this.type = type;
-        this.data = data;
-        this.sections = sections;
-        this.created = created;
-        this.updated = updated;
-        this.deleted = deleted;
-        this.visibleToPublic = visibleToPublic;
-    }
-
-    public Content(String title, String description, ContentType type, byte[] data, Set<Section> sections, boolean visibleToPublic) {
-        this.title = title;
-        this.description = description;
-        this.type = type;
-        this.data = data;
         this.sections = sections;
         this.created = new Date();
         this.updated = new Date();
         this.visibleToPublic = visibleToPublic;
+        this.setBase64Data(base64);
     }
+
+    @JsonProperty
+    public String getBase64Data() {
+        return Base64.encodeBase64String(this.data);
+    }
+
+    @JsonProperty
+    public void setBase64Data(String base64) {
+        byte[] dataByte = Base64.decodeBase64(base64);
+        this.setData(dataByte);
+    }
+
 
     public void addSection(Section section) {
         sections.add(section);
@@ -79,6 +80,17 @@ public class Content {
 
     public void removeSections(List<Section> sections) {
         sections.forEach(this::removeSection);
+    }
+
+    @PrePersist
+    public void prePersist() {
+        created = new Date();
+        updated = new Date();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        updated = new Date();
     }
 
 }
