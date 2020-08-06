@@ -93,8 +93,8 @@ SET time_zone = "+00:00";
 --     alter table Section
 --        drop index UK_hq8y00c1uc1oq1ieusy25c6ui;
 
-    alter table Section
-       add constraint UK_section_type unique (TYPE);
+--     alter table Section
+--        add constraint UK_section_type unique (TYPE);
 
     alter table Feedback
        add constraint FK_feedback_content
@@ -176,4 +176,9 @@ INSERT into `section` (`section_id`, `title`, `description`, `rendering`, `type`
 (1,"Event", "Selectively chosen images from Small Wonders", "CAROUSAL", "EVENT"),
 (2,"Curriculum", "Curriculum of Small Wonders", "GRID", "CURRICULUM"),
 (3,"News", "News of Small Wonders", "STACK", "NEWS"),
-(4,"Header", "Header of Small Wonders", "CAROUSAL", "HEADER");
+(4,"Header", "Header of Small Wonders", "CAROUSAL", "HEADER"),
+(5,"Event", "Selectively chosen images from Small Wonders", "CAROUSAL", "HOME"),
+(6,"Home 1", "Home carousal image 1", "CAROUSAL", "HOME"),
+(7,"Home 2", "Home car 2", "CAROUSAL", "HOME"),
+(8,"Home st 1", "Home stack 1", "STACK", "HOME"),
+(9,"Home st 2", "Home stack 2", "STACK", "HOME");

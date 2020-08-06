@@ -5,7 +5,7 @@ import com.smallwonders.model.core.Coordinates;
 import com.smallwonders.model.auth.User;
 import com.smallwonders.model.core.content.Content;
 import com.smallwonders.model.core.section.Organization;
-import com.smallwonders.model.core.section.SectionType;
+import com.smallwonders.model.core.page.PageType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +18,7 @@ import java.util.Date;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-@DiscriminatorValue(SectionType.Values.ADMISSION)
+@DiscriminatorValue(PageType.Values.ADMISSION)
 public class Admission extends FormSection {
 
     private User child;
@@ -27,7 +27,7 @@ public class Admission extends FormSection {
 
 
     public Admission(String title, String description, Collection<Content> contents, String name, String phoneNumber, Coordinates location, Organization organization, String email, String message, Status status, User child, Date dateOfBirth, Category... categories) {
-        super(title, description, SectionType.ADMISSION, contents, name, phoneNumber, location, organization, email, message, status, categories);
+        super(title, description, PageType.ADMISSION, contents, name, phoneNumber, location, organization, email, message, status, categories);
         this.child = child;
         this.dateOfBirth = dateOfBirth;
     }

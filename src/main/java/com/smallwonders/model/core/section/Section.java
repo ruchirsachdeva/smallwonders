@@ -1,6 +1,7 @@
 package com.smallwonders.model.core.section;
 
 import com.smallwonders.model.core.content.Content;
+import com.smallwonders.model.core.page.PageType;
 import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -69,10 +70,10 @@ public class Section {
     @Enumerated(EnumType.STRING)
     private Rendering rendering;
 
-    @Column(name = "TYPE", nullable = false, unique = true, columnDefinition = "varchar2 default 'EVENT'")
+    @Column(name = "TYPE", nullable = false, columnDefinition = " varchar(255) default 'EVENT'")
     @Enumerated(EnumType.STRING)
     @ApiParam
-    private SectionType type;
+    private PageType type;
 
 //    @ManyToMany(mappedBy = "bodySections", fetch = FetchType.LAZY)
 //    @JsonIgnore
@@ -84,21 +85,21 @@ public class Section {
     @Enumerated(EnumType.STRING)
     private Set<Category> categories;
 
-    public Section(String title, String description, SectionType sectionType, Collection<Content> contents, Category... categories) {
+    public Section(String title, String description, PageType pageType, Collection<Content> contents, Category... categories) {
         this.title = title;
         this.description = description;
         this.contents = contents;
         this.categories = new HashSet<>(Arrays.asList(categories));
-        this.type = sectionType;
+        this.type = pageType;
     }
 
 
-    public Section(String title, String description, SectionType sectionType, Collection<Content> contents, Rendering rendering, Category... categories) {
-        this(title, description, sectionType, contents, categories);
+    public Section(String title, String description, PageType pageType, Collection<Content> contents, Rendering rendering, Category... categories) {
+        this(title, description, pageType, contents, categories);
         this.rendering = rendering;
     }
 
-    public static Section of(SectionType t) {
+    public static Section of(PageType t) {
         return new Section("title", "description", t, Collections.emptyList(), Rendering.CAROUSAL, Category.SCHOOL);
     }
 

@@ -1,7 +1,7 @@
 package com.smallwonders.controller;
 
 import com.smallwonders.model.core.content.Content;
-import com.smallwonders.model.core.section.SectionType;
+import com.smallwonders.model.core.page.PageType;
 import com.smallwonders.service.ContentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +49,7 @@ public class ContentController {
 
     @CrossOrigin(origins = {"http://localhost:4200", "https://lit-beach-29911.herokuapp.com"})
     @GetMapping("/section/{type}")
-    public ResponseEntity<List<Content>> getContents(@PathVariable SectionType type) {
+    public ResponseEntity<List<Content>> getContents(@PathVariable PageType type) {
         return new ResponseEntity(service.getContents(type), HttpStatus.OK);
     }
 

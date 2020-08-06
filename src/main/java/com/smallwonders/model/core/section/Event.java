@@ -2,6 +2,7 @@ package com.smallwonders.model.core.section;
 
 import com.smallwonders.model.core.content.Content;
 import com.smallwonders.model.core.content.ContentType;
+import com.smallwonders.model.core.page.PageType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,11 +15,11 @@ import java.util.Collection;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-@DiscriminatorValue(SectionType.Values.EVENT)
+@DiscriminatorValue(PageType.Values.EVENT)
 public class Event extends Section {
 
     public Event(String title, String description, Collection<Content> contents, Category... categories) {
-        super(title, description, SectionType.EVENT, contents, categories);
+        super(title, description, PageType.EVENT, contents, categories);
     }
 
     public static Section dummySection() {

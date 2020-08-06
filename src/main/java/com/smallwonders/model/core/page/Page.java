@@ -32,6 +32,7 @@ public class Page {
 //    @JsonIgnore
     private Collection<Section> sections;
 
+    @Column(name = "TYPE", nullable = false, columnDefinition = " varchar(255) default 'EVENT'")
     @Enumerated(EnumType.STRING)
     private PageType pageType;
 
@@ -45,8 +46,5 @@ public class Page {
         return page;
     }
 
-    public enum PageType {
-        CURRICULUM, EVENT, FAQ, NEWS, BRANCH, FRANCHISE, ADMISSION
-    }
 
 }

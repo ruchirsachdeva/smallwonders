@@ -1,8 +1,7 @@
 package com.smallwonders.repository;
 
-import com.smallwonders.model.core.page.Page;
 import com.smallwonders.model.core.section.Section;
-import com.smallwonders.model.core.section.SectionType;
+import com.smallwonders.model.core.page.PageType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -16,6 +15,6 @@ import java.util.Optional;
 public interface SectionRepository extends JpaRepository<Section, Long> {
 
     @RestResource
-    Optional<Section> findByType(@Param("type") SectionType sectionType);
+    List<Section> findByType(@Param("type") PageType pageType);
 
 }

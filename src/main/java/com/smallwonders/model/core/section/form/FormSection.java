@@ -4,7 +4,7 @@ import com.smallwonders.model.core.Coordinates;
 import com.smallwonders.model.core.content.Content;
 import com.smallwonders.model.core.section.Organization;
 import com.smallwonders.model.core.section.Section;
-import com.smallwonders.model.core.section.SectionType;
+import com.smallwonders.model.core.page.PageType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,8 +28,8 @@ public abstract class FormSection extends Section {
     private String message;
     private Status status;
 
-    public FormSection(String title, String description, SectionType sectionType, Collection<Content> contents, String name, String phoneNumber, Coordinates location, Organization organization, String email, String message, Status status, Category... categories) {
-        super(title, description, sectionType, contents, categories);
+    public FormSection(String title, String description, PageType pageType, Collection<Content> contents, String name, String phoneNumber, Coordinates location, Organization organization, String email, String message, Status status, Category... categories) {
+        super(title, description, pageType, contents, categories);
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.location = location;

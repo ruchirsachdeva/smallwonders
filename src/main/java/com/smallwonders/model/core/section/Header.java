@@ -2,6 +2,7 @@ package com.smallwonders.model.core.section;
 
 
 import com.smallwonders.model.core.content.Content;
+import com.smallwonders.model.core.page.PageType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,14 +15,14 @@ import java.util.Collections;
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor
-@DiscriminatorValue(SectionType.Values.HEADER)
+@DiscriminatorValue(PageType.Values.HEADER)
 public class Header extends Section {
 
     @Enumerated(EnumType.STRING)
     private Rendering rendering;
 
     public Header(String title, String description, Collection<Content> contents, Rendering rendering, Category... categories) {
-        super(title, description, SectionType.HEADER, contents, categories);
+        super(title, description, PageType.HEADER, contents, categories);
         this.rendering = rendering;
     }
 

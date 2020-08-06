@@ -1,13 +1,15 @@
 package com.smallwonders.controller;
 
 import com.smallwonders.model.core.section.Section;
-import com.smallwonders.model.core.section.SectionType;
+import com.smallwonders.model.core.page.PageType;
 import com.smallwonders.service.SectionService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.smallwonders.controller.Util.responseEntity;
@@ -35,9 +37,9 @@ public class SectionController {
     )
     @CrossOrigin(origins = {"http://localhost:4200", "https://lit-beach-29911.herokuapp.com"})
     @GetMapping("/{type}")
-    public ResponseEntity<Section> getSection(@ApiParam @PathVariable SectionType type) {
-        Optional<Section> section = service.getSection(type);
-        return responseEntity(section);
+    public ResponseEntity<List<Section>> getSection(@ApiParam @PathVariable PageType type) {
+        List<Section> sections = service.getSection(type);
+        return new ResponseEntity(sections, HttpStatus.OK);
     }
 
     @CrossOrigin(origins = {"http://localhost:4200", "https://lit-beach-29911.herokuapp.com"})

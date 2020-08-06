@@ -2,7 +2,7 @@ package com.smallwonders.service;
 
 import com.smallwonders.model.core.content.Content;
 import com.smallwonders.model.core.section.Section;
-import com.smallwonders.model.core.section.SectionType;
+import com.smallwonders.model.core.page.PageType;
 import com.smallwonders.repository.ContentRepository;
 import com.smallwonders.repository.SectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class ContentService {
         return repository.findAll();
     }
 
-    public List<Content> getContents(SectionType type) {
+    public List<Content> getContents(PageType type) {
         return repository.findBySections_Type(type);
     }
 
